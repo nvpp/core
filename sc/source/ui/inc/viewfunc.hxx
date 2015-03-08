@@ -368,6 +368,9 @@ private:
                                         bool bAttrChanged, bool bAddUndo );
 
     void            MarkAndJumpToRanges(const ScRangeList& rRanges);
+
+    void            NotifyUnitErrorInFormula( const ScAddress& rAddress, ScDocument* pDoc );
+    DECL_LINK( EditUnitErrorFormulaHandler, PushButton* );
 };
 
 #endif
