@@ -50,6 +50,8 @@ class SvxHyperlinkItem;
 class ScTransferObj;
 class ScTableProtection;
 
+struct UnitConversionPushButton;
+
 namespace editeng { class SvxBorderLine; }
 
 namespace sc {
@@ -371,6 +373,13 @@ private:
 
     void            NotifyUnitErrorInFormula( const ScAddress& rAddress, ScDocument* pDoc );
     DECL_LINK( EditUnitErrorFormulaHandler, PushButton* );
+
+    void            NotifyUnitConversionRecommended( const ScAddress& rCellAddress,
+                                                     ScDocument* pDoc,
+                                                     const OUString& sHeaderUnit,
+                                                     const ScAddress& rHeaderAddress,
+                                                     const OUString& sCellUnit );
+    DECL_LINK( UnitConversionRecommendedHandler, UnitConversionPushButton* );
 };
 
 #endif
