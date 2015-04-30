@@ -856,7 +856,7 @@ void ToolBox::SetLineCount( sal_uInt16 nNewLines )
 
         // better redraw everything, as otherwise there might be problems
         // with regions that were copied with CopyBits
-        ImplInvalidate( false );
+        Invalidate();
     }
 }
 
@@ -1331,8 +1331,8 @@ void ToolBox::EndSelection()
         // reset
         mbDrag = false;
         mbSelection = false;
-        if ( mnCurPos != TOOLBOX_ITEM_NOTFOUND )
-            ImplDrawItem( mnCurPos );
+        if (mnCurPos != TOOLBOX_ITEM_NOTFOUND)
+            InvalidateItem(mnCurPos);
         EndTracking();
         ReleaseMouse();
         Deactivate();
@@ -1356,7 +1356,7 @@ void ToolBox::SetItemDown( sal_uInt16 nItemId, bool bDown, bool bRelease )
             if ( nPos != mnCurPos )
             {
                 mnCurPos = nPos;
-                ImplDrawItem( mnCurPos, 1 );
+                InvalidateItem(mnCurPos, 1);
                 Flush();
             }
         }
@@ -1364,7 +1364,7 @@ void ToolBox::SetItemDown( sal_uInt16 nItemId, bool bDown, bool bRelease )
         {
             if ( nPos == mnCurPos )
             {
-                ImplDrawItem( mnCurPos, 0 );
+                InvalidateItem(mnCurPos);
                 Flush();
                 mnCurPos = TOOLBOX_ITEM_NOTFOUND;
             }
@@ -1664,8 +1664,8 @@ void ToolBox::ImplFillLayoutData() const
         ImplToolItem* pItem = &mpData->m_aItems[i];
 
         // only draw, if the rectangle is within PaintRectangle
-        if ( !pItem->maRect.IsEmpty() )
-            const_cast<ToolBox*>(this)->ImplDrawItem( i, 0, false, true );
+        if (!pItem->maRect.IsEmpty())
+            const_cast<ToolBox*>(this)->InvalidateItem(i, 0, false, true);
     }
 }
 
